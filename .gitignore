@@ -4,10 +4,11 @@ __pycache__/
 *.pyc
 .Python
 tmp/
+output/
 .DS_Store
 .env
 .env.*
 !.env.example
 *.pem
-.idea/
+*.egg-info/
 .vscode/

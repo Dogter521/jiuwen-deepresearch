@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LeaderBrief",
+  "type": "object",
+  "required": ["intent", "markdown", "engine"],
+  "properties": {
+    "intent": { "$ref": "intent.json" },
+    "engine": { "type": "string" },
+    "conversation_id": { "type": "string" },
+    "markdown": { "type": "string" },
+    "sources": {
+      "type": "array",
+      "items": { "$ref": "evidence.json" }
+    }
+  }
+}

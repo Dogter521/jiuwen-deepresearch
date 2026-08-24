@@ -1,31 +1,57 @@
 # jiuwen-deepresearch
 
-基于 openJiuwen，复用 `agent-core`、`agent-runtime`、`deepsearch`，面向领导场景的 AI 知识 Deep Research Agent。
+面向领导的 AI 知识 Deep Research Agent。复用 openJiuwen 的 `agent-core`（PyPI：`openjiuwen`）与 `deepsearch`（PyPI：`openjiuwen-deepsearch`），在本仓库做薄业务层：意图槽位、三种领导模板、证据口径。
 
-帮助决策者深度理解 AI 知识与面上科研：趋势、格局、瓶颈、可落地路径；默认交付一句话结论、一页简报、证据链与后续动作。
+默认交付：一句话结论、一页简报、证据链、风险、30/90 天动作。
 
-## 目录结构
+## 三种模式
+
+| 模式 | 参数 | 产出 |
+|------|------|------|
+| 汇报 | `--mode brief` | 开会用的一页简报 |
+| 学习 | `--mode learn` | 概念阶梯与必读清单 |
+| 立项 | `--mode proposal` | 面上口径：问题、意义、路线、指标 |
+
+## 快速开始（离线 MVP）
+
+需要 Python 3.11 或 3.12（不要用 3.14，上游 SDK 不支持）。
+
+```bash
+cd jiuwen-deepresearch
+python3.12 -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+jiuwen-research --list-examples
+jiuwen-research "多模态大模型在医疗影像的机会与风险" --mode brief
+```
+
+离线默认走 `dry-run`：打通意图 → 模板 → 成稿，不调用模型和搜索。结果写在 `output/`。
+
+## 接入真实 DeepSearch
+
+```bash
+cp .env.example .env
+# 填写 LLM_BASE_URL、LLM_API_KEY，以及搜索引擎密钥
+pip install -e ".[deepsearch]"
+jiuwen-research "具身智能现在到哪一步了" --mode brief --engine deepsearch
+```
+
+版本锁定见 `docs/phase0-api.md`。每次新任务会生成新的 `conversation_id`。
+
+## 目录
 
 ```
-jiuwen-deepresearch/
-├── README.md
-├── docs/                 # 分析规划与产品口径
-├── configs/              # 模型、超时、模式配置
-├── prompts/              # System Prompt 与阶段提示词
-├── schemas/              # 意图、证据、简报结构
-├── src/
-│   ├── agent/            # 组装 openJiuwen Agent
-│   ├── tools/            # 封装 deepsearch 与本地工具
-│   ├── workflow/         # Deep Research 阶段编排
-│   ├── render/           # 简报 / 口播 / 立项表述
-│   └── eval/             # 黄金问题集与检查
-├── examples/             # 示例问题
-└── tests/
+configs/                 # 引擎与模式
+prompts/templates/       # 三套 DeepSearch 兼容模板
+schemas/                 # 意图 / 证据 / 简报
+src/jiuwen_deepresearch/ # CLI、意图、工作流、DeepSearch 适配器
+examples/sample_queries.md
+tests/
 ```
 
 ## 当前状态
 
-- 已完成：开源调研与建设规划报告
-  - PDF：`docs/面向领导的AI知识DeepResearch建设报告.pdf`
-  - Markdown：`docs/面向领导的AI知识DeepResearch建设报告.md`
-- 下一步：锁定 openJiuwen 版本，跑通 DeepSearch 官方示例（Phase 0）
+- Phase 0：API 对照见 `docs/phase0-api.md`
+- Phase 1 MVP：离线全链路可跑；DeepSearch 为可选引擎
+- 一阶段实现报告：`docs/一阶段实现报告.md`
+- 规划报告：`docs/面向领导的AI知识DeepResearch建设报告.md`

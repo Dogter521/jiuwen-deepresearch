@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jiuwen-deepresearch"
+version = "0.1.0"
+description = "面向领导的 AI 知识 Deep Research Agent，复用 openJiuwen agent-core 与 deepsearch。"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+license = { text = "Apache-2.0" }
+authors = [{ name = "jiuwen-deepresearch" }]
+dependencies = [
+  "pydantic>=2.7",
+  "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+deepsearch = [
+  "openjiuwen>=0.1.17,<0.2",
+  "openjiuwen-deepsearch>=0.1.9,<0.2",
+]
+dev = [
+  "pytest>=8.0",
+]
+
+[project.scripts]
+jiuwen-research = "jiuwen_deepresearch.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+jiuwen_deepresearch = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

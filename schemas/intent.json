@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LeadershipResearchIntent",
+  "type": "object",
+  "required": ["goal", "topic", "depth"],
+  "properties": {
+    "goal": {
+      "type": "string",
+      "enum": ["brief", "learn", "proposal"],
+      "description": "汇报 / 学习 / 立项"
+    },
+    "topic": { "type": "string" },
+    "horizon": {
+      "type": "string",
+      "enum": ["6m", "1-3y", "5y+"],
+      "default": "1-3y"
+    },
+    "audience": {
+      "type": "string",
+      "default": "院所领导"
+    },
+    "constraints": {
+      "type": "string",
+      "default": ""
+    },
+    "depth": {
+      "type": "string",
+      "enum": ["L1", "L2", "L3"],
+      "description": "L1 简报 / L2 标准 / L3 深潜"
+    }
+  }
+}

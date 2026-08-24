@@ -1,0 +1,20 @@
+brief:
+  label: 汇报
+  description: 开会用，一页简报加三条建议与风险
+  default_depth: L1
+  report_type: 精简版
+  template: prompts/templates/brief.md
+
+learn:
+  label: 学习
+  description: 补齐认知，概念阶梯、类比与必读清单
+  default_depth: L2
+  report_type: 解释型
+  template: prompts/templates/learn.md
+
+proposal:
+  label: 立项
+  description: 面上科研口径，问题提出、意义、路线、指标与风险
+  default_depth: L2
+  report_type: 专业版
+  template: prompts/templates/proposal.md

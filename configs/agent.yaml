@@ -1,0 +1,20 @@
+engine: dry-run  # dry-run | deepsearch
+
+output_dir: output
+
+llm:
+  model_name: qwen3-max
+  model_type: openai
+  base_url: ""
+  api_key: ""
+
+search:
+  engine_name: jina
+  search_url: https://s.jinaai.cn
+  search_api_key: ""
+
+deepsearch:
+  search_mode: research
+  execution_method: parallel
+  workflow_human_in_the_loop: false
+  outline_interaction_enabled: false
